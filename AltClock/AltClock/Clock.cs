@@ -74,11 +74,12 @@ namespace Deweyvm.AltClock
 
         private void timerTick(object sender, EventArgs e)
         {
-            adjustSize();
+            
             if (isMouseInside())
             {
                 var now = DateTime.Now;
-                string weekday = now.DayOfWeek.ToString().Substring(0,1);
+                string weekday = now.DayOfWeek.ToString().Substring(0, 3);
+                string date = weekday + ", " + now.ToString("MMM") + " " + now.Day;
                 int hour = now.Hour;
                 if (hour > 12)
                 {
@@ -87,7 +88,7 @@ namespace Deweyvm.AltClock
                 int minute = now.Minute;
                 int second = now.Second;
                 string timeString = makeTimeString(new float[] {hour, minute, second});
-                label.Text = string.Format("{0} {1}", weekday, timeString);
+                label.Text = string.Format("{0} {1}", date, timeString);
             }
             else
             {
@@ -101,7 +102,7 @@ namespace Deweyvm.AltClock
                 label.Text = string.Format("{0} {1}", weekday, timeString);
             }
 
-            
+            adjustSize();
 
             
         }

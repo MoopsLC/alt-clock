@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A3ECDB97-8F1B-4F5B-AFE7-EDE29EE4D189}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AltClock</RootNamespace>
     <AssemblyName>AltClock</AssemblyName>
@@ -58,8 +58,21 @@
     <ApplicationIcon>16x16.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MouseKeyboardActivityMonitor, Version=3.0.1.34779, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MouseKeyboardActivityMonitor.dll</HintPath>
+    </Reference>
+    <Reference Include="NDde, Version=2.1.563.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\NDde.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,14 +83,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clock.cs" />
-    <Compile Include="ClockLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Backend\IActivityMonitor.cs" />
+    <Compile Include="Backend\InfoProcessor.cs" />
+    <Compile Include="Backend\IProcessWatcher.cs" />
+    <Compile Include="Backend\ProcessWatchingForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Backend\WindowInfo.cs" />
+    <Compile Include="Backend\WindowsActivityMonitor.cs" />
+    <Compile Include="Backend\WindowsProcessWatcher.cs" />
+    <Compile Include="Backend\WindowsProcessWatcherBase.cs" />
+    <Compile Include="ClockWidget\PercentClock.cs" />
+    <Compile Include="ClockWidget\ClockLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\DefaultDict.cs" />
+    <Compile Include="Data\Info.cs" />
+    <Compile Include="Data\Option.cs" />
+    <Compile Include="Data\Point2i.cs" />
+    <Compile Include="Data\ProcessedInfo.cs" />
+    <Compile Include="Data\ProgramInfo.cs" />
+    <Compile Include="Data\Settings.cs" />
+    <Compile Include="Data\SettingsInfo.cs" />
+    <Compile Include="Data\ThreadQueue.cs" />
+    <Compile Include="Graphing\Grapher.cs" />
+    <Compile Include="Graphing\SeriesData.cs" />
+    <Compile Include="Graphing\SeriesEntry.cs" />
+    <Compile Include="Logging\Log.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="AreaChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -89,6 +129,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="config.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="COPYING">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AUTHORS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,6 +152,20 @@
     <Content Include="16x16.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="lib\MouseKeyboardActivityMonitor.dll" />
+    <Content Include="lib\NDde.dll" />
+    <Content Include="lib\Newtonsoft.Json.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,12 +1,20 @@
-﻿using System;
+﻿#region License
+// Copyright 2012 deweyvm, see also AUTHORS file.
+// Licenced under GPL v3
+// see COPYING file for more information or visit http://www.gnu.org/licenses/gpl-3.0.txt
+#endregion Licence
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Deweyvm.AltClock
+namespace Deweyvm.AltClock.Clock
 {
+    /*
+     * Custom label to support click to drag behavior
+     */
     class ClockLabel : Label
     {
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -20,11 +28,8 @@ namespace Deweyvm.AltClock
 
         public ClockLabel()
         {
-            this.DoubleBuffered = true;
-            this.Dock = DockStyle.Fill;
-
-            
-
+            this.DoubleBuffered = true; //prevents flicker
+            this.Dock = DockStyle.None; //prevents flicker
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -38,7 +43,7 @@ namespace Deweyvm.AltClock
                 {
                     topMost = topMost.Parent;
                 }
-                SendMessage(topMost.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+                //SendMessage(topMost.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
         }
     }

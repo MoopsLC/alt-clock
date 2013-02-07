@@ -1,4 +1,9 @@
-﻿using System;
+﻿#region License
+// Copyright 2012 deweyvm, see also AUTHORS file.
+// Licenced under GPL v3
+// see COPYING file for more information or visit http://www.gnu.org/licenses/gpl-3.0.txt
+#endregion Licence
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,8 +18,8 @@ namespace Deweyvm.AltClock
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();//huh?
+            Application.SetCompatibleTextRenderingDefault(false);//what?
             var form = new MainForm();
             Application.Run(form);
         }

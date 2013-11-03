@@ -127,7 +127,8 @@ namespace Deweyvm.Prod
 
         private Rectangle getRect()
         {
-            return new Rectangle(0, 0, 1920, 1048);
+            var screenRect = Screen.PrimaryScreen.WorkingArea;
+            return new Rectangle(0, 0, screenRect.Width, screenRect.Height);
         }
 
         private void mouseEnter()

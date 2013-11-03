@@ -11,11 +11,18 @@ using Prod.Data;
 namespace Prod.Backend
 {
     /// <summary>
-    /// Represents a monitor of user activity (such as mouse movement).
+    /// A monitor of user activity (such as mouse movement).
     /// </summary>
     interface IActivityMonitor
     {
+        /// <summary>
+        /// The number of actions since the last tick.
+        /// </summary>
         int ActionCount { get; }
+
+        /// <summary>
+        /// If the mouse has moved, the point will contain its position.
+        /// </summary>
         Option<Point2i> HasMoved { get; }
     }
 }

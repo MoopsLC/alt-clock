@@ -15,14 +15,6 @@ using Prod.Gui;
 
 namespace Deweyvm.Prod
 {
-
-    class MySplit : SplitContainer
-    {
-        public MySplit()
-        {
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
-        }
-    }
     public class MainForm : ProcessWatchingForm
     {
         private const int TimerResolution = 80;
@@ -59,7 +51,7 @@ namespace Deweyvm.Prod
 
         private static SplitContainer createSplitter()
         {
-            MySplit splitter = new MySplit();
+            DoubleBufferedSplitter splitter = new DoubleBufferedSplitter();
             splitter.Panel2MinSize = 10;
             splitter.SplitterDistance = 999;
 
@@ -80,7 +72,7 @@ namespace Deweyvm.Prod
         public int ThingWidth { get { return Math.Max(percentClock.Size.Width, chart.Width); } }
 
         /// <summary>
-        /// Updates clock to proper sizein the case of non-fixed width fonts.
+        /// Updates clock to proper size in the case of non-fixed width fonts.
         /// </summary>
         /// <param name="height">height of displayed text</param>
         /// <param name="isMinimized">whether or not the chart is minimized</param>
@@ -113,6 +105,7 @@ namespace Deweyvm.Prod
             this.Icon = initIcon();
         }
 
+        //create a right click menu for the tray icon
         private ContextMenu initContextMenu()
         {
             MenuItem exitItem = new MenuItem("&Exit");
@@ -121,7 +114,7 @@ namespace Deweyvm.Prod
             return menu;
         }
 
-        
+        //create an icon in the tray
         private Icon initIcon()
         {
             this.notifyIcon = new NotifyIcon();
@@ -131,7 +124,6 @@ namespace Deweyvm.Prod
             notifyIcon.Visible = true;
             return icon;
         }
-
 
         private Rectangle getRect()
         {
@@ -176,7 +168,6 @@ namespace Deweyvm.Prod
                 mouseLeave();
                 percentClock.MouseLeave();
             }
-            //ResumeLayout();
         }
 
         protected override void OnKeyDown(KeyEventArgs e)

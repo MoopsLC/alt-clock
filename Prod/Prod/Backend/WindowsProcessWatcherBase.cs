@@ -15,6 +15,11 @@ using SHDocVw;
 
 namespace Prod.Backend
 {
+    /// <summary>
+    /// Utility methods for the WindowsProcessWatcher, performing functions
+    /// such as detecting the URL of an active browser for the three major
+    /// browsers (at least, as of writing this ;) )
+    /// </summary>
     abstract class WindowsProcessWatcherBase : IProcessWatcher
     {
         public WindowInfo CurrentWindow { get; private set; }
@@ -22,7 +27,7 @@ namespace Prod.Backend
 
 
 
-        // /////////// BROWSER SHIT ///////////
+        // /////////// Url detection in active browsers ///////////
 
         private const int WM_GETTEXTLENGTH = 0x000E;
         private const int WM_GETTEXT = 0x000D;
@@ -87,8 +92,6 @@ namespace Prod.Backend
         }
 
         // ///////////////////////////////
-
-
 
 
 

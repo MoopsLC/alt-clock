@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backend\IActivityMonitor.cs" />
-    <Compile Include="Backend\InfoProcessor.cs" />
+    <Compile Include="Backend\ActivityInfoProcessor.cs" />
     <Compile Include="Backend\IProcessWatcher.cs" />
     <Compile Include="Backend\ProcessWatchingForm.cs">
       <SubType>Form</SubType>
@@ -121,12 +121,15 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Data\SettingsInfo.cs" />
     <Compile Include="Data\ThreadQueue.cs" />
+    <Compile Include="DoubleBufferedSplitter.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Graphing\Grapher.cs" />
     <Compile Include="Graphing\SeriesData.cs" />
     <Compile Include="Graphing\SeriesEntry.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="MainForm.cs">
-      <SubType>Component</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="AreaChart.cs">
@@ -147,9 +150,6 @@
     <None Include="config.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="AUTHORS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

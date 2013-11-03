@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Deweyvm.Prod.Clock
 {
-    /*
-     * Custom label to support click to drag behavior
-     */
+    /// <summary>
+    /// Custom label implementation to support click and drag movement
+    /// </summary>
     class ClockLabel : Label
     {
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -43,7 +43,7 @@ namespace Deweyvm.Prod.Clock
                 {
                     topMost = topMost.Parent;
                 }
-                //SendMessage(topMost.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+                SendMessage(topMost.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
         }
     }

@@ -45,9 +45,9 @@ namespace Prod.Logging
 
         }
 
-        public void AcceptInfo(object sender, InfoEventArgs args)
+        public void AcceptInfo(object sender, TickInfoEventArgs args)
         {
-            string line = args.Info.ToString();
+            string line = args.TickInfo.ToString();
             //Utils.WriteLine(line);
             File.AppendAllLines(logFile, new[] { line });
         }

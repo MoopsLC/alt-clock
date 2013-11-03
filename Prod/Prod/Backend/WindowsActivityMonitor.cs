@@ -13,6 +13,9 @@ using Prod.Data;
 
 namespace Prod.Backend
 {
+    /// <summary>
+    /// Implementation of an IActivityMonitor for Windows.
+    /// </summary>
     class WindowsActivityMonitor : IActivityMonitor
     {
 

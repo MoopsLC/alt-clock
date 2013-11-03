@@ -10,18 +10,10 @@ using System;
 
 namespace Prod.Data
 {
-    public class InfoEventArgs : EventArgs
-    {
-        public readonly Info Info;
-        public InfoEventArgs(Info info)
-        {
-            this.Info = info;
-        }
-    }
-
-    delegate void InfoEventHandler(object sender, InfoEventArgs args);
-
-    public struct Info
+    /// <summary>
+    /// Data gathered at one snapshot of the current active window/process.
+    /// </summary>
+    public struct TickInfo
     {
         public readonly double Time;
         public readonly Option<Point2i> Mouse;
@@ -31,13 +23,13 @@ namespace Prod.Data
         public readonly int NumKeys;
         public readonly uint ProcessId;
 
-        public Info(double time,
-                    Option<Point2i> mouse,
-                    uint pid,
-                    string exename,
-                    string title,
-                    Option<string> url,
-                    int numKeys)
+        public TickInfo(double time,
+                        Option<Point2i> mouse,
+                        uint pid,
+                        string exename,
+                        string title,
+                        Option<string> url,
+                        int numKeys)
         {
             this.Time = time;
             Debug.Assert(mouse != null, "mouse != null");
@@ -53,8 +45,20 @@ namespace Prod.Data
         public override string ToString()
         {
             string movedString = Mouse.HasValue ? Mouse.Value.ToString() : "false";
-            return  String.Format("{0}:{1},{2},{3},{4}", ExeName, ProcessId, Time, movedString, NumKeys);
+            return String.Format("{0}:{1},{2},{3},{4}", ExeName, ProcessId, Time, movedString, NumKeys);
         }
 
     }
+
+    public class TickInfoEventArgs : EventArgs
+    {
+        public readonly TickInfo TickInfo;
+        public TickInfoEventArgs(TickInfo info)
+        {
+            this.TickInfo = info;
+        }
+    }
+
+    delegate void TickInfoEventHandler(object sender, TickInfoEventArgs args);
+
 }

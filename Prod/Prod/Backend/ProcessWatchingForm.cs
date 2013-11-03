@@ -14,17 +14,20 @@ using Prod.Graphing;
 
 namespace Prod.Gui
 {
+    /// <summary>
+    /// Container form to display time use graphically.
+    /// </summary>
     public class ProcessWatchingForm : Form
     {
         protected Grapher grapher;
         public ProcessWatchingForm()
         {
             Settings.Load();
-            //Log log = new Log();
             initForm();
-            InfoProcessor m = new InfoProcessor();
+            ActivityInfoProcessor m = new ActivityInfoProcessor();
             grapher = new Grapher();
-            //m.InfoReceived += log.AcceptInfo;
+            /*Log log = new Log();
+            m.InfoReceived += log.AcceptInfo;*/
             m.InfoReceived += grapher.AcceptInfo;
 
             m.Begin();

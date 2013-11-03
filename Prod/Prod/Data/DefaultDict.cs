@@ -10,6 +10,11 @@ using System.Text;
 
 namespace Prod.Data
 {
+    /// <summary>
+    /// Dictionary with a default value supplied if the value associated with
+    /// an unbound key is requested. After such a request, the default value 
+    /// is then stored as that key for future use (until overwritten).
+    /// </summary>
     public class DefaultDict<K, V> : IDictionary<K, V> where V : struct 
     {
         private V defaultValue;

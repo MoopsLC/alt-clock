@@ -11,13 +11,15 @@ using System.Text.RegularExpressions;
 
 namespace Prod.Data
 {
+    /// <summary>
+    /// An immutable two dimensional point of integers.
+    /// </summary>
     public struct Point2i : IEquatable<Point2i>
     {
         public static readonly Point2i Zero = new Point2i(0, 0);
         public static readonly Point2i One = new Point2i(1, 1);
         public static readonly Point2i UnitX = new Point2i(1, 0);
         public static readonly Point2i UnitY = new Point2i(0, 1);
-
 
         public readonly int X;
         public readonly int Y;
@@ -30,7 +32,6 @@ namespace Prod.Data
         public override bool Equals(object obj)
         {
             return obj is Point2i && this.Equals((Point2i)obj);
-
         }
 
         public override int GetHashCode()

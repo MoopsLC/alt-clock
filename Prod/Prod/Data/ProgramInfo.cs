@@ -30,7 +30,7 @@ namespace Prod.Data
             return rawUrl.ToLower().Contains(domain.ToLower());
         }
 
-        public static ProgramInfo FromRaw(Info info)
+        public static ProgramInfo FromRaw(TickInfo info)
         {
 
             if (info.Url.HasValue)

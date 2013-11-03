@@ -11,8 +11,8 @@ using System.Text;
 namespace Prod.Data
 {
     /// <summary>
-    /// <para>Option: ALL YOUR BASE ARE BELONG TO US</para>
-    /// <para>Null: What you say<i>!!</i></para>
+    /// An option type to represent a result which may or may not contain 
+    /// a value.
     /// </summary>
     public sealed class Option<T>
     {
@@ -31,7 +31,7 @@ namespace Prod.Data
             this.HasValue = false;
         }
 
-        public Option<R> Convert<R>(Func<T, R> converter)
+        public Option<R> Map<R>(Func<T, R> converter)
         {
             if (this.HasValue)
             {

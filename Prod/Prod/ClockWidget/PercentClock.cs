@@ -12,6 +12,13 @@ using System.Windows.Forms;
 
 namespace Deweyvm.Prod.Clock
 {
+    /// <summary>
+    /// Gives time of day as a percentage of time passed since 6 a.m.
+    /// 1 day = 100 "hours"
+    /// 1 "hours" = 100 "minutes"
+    /// 1 "minute" = 100 "seconds"
+    /// Weeks given are divisible by 5 because it's a nicer number than 7.
+    /// </summary>
     internal class PercentClock
     {
         //86,400 SI seconds
@@ -33,7 +40,6 @@ namespace Deweyvm.Prod.Clock
 
         public PercentClock()
         {
-            //this.locker = locker;
             this.label = initLabel();
             resetSize();
         }
@@ -51,9 +57,6 @@ namespace Deweyvm.Prod.Clock
         {
             return label;
         }
-
-
-
 
         private static DateTime getNow()
         {
@@ -105,8 +108,6 @@ namespace Deweyvm.Prod.Clock
         private void resetSize()
         {
             var size = Size;
-
-            //label.Width = size.Width;
             label.Height = size.Height;
         }
 

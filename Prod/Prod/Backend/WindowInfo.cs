@@ -10,6 +10,9 @@ using Prod.Data;
 
 namespace Prod.Backend
 {
+    /// <summary>
+    /// Data container for information about the foreground window.
+    /// </summary>
     class WindowInfo
     {
         public readonly uint ProcessId;

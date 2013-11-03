@@ -16,7 +16,7 @@ namespace Prod.Data
         public readonly bool DidActivity;
         public readonly double Time;
 
-        public ProcessedInfo(Info info)
+        public ProcessedInfo(TickInfo info)
         {
             this.Program = ProgramInfo.FromRaw(info);
             this.DidActivity = info.NumKeys > 0 || info.Mouse.HasValue;

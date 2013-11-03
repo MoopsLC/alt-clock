@@ -10,6 +10,9 @@ using Prod.Data;
 
 namespace Prod.Backend
 {
+    /// <summary>
+    /// Implementation of IProcessWatcher for windows.
+    /// </summary>
     class WindowsProcessWatcher : WindowsProcessWatcherBase
     {
         private IActivityMonitor monitor;
@@ -26,7 +29,7 @@ namespace Prod.Backend
             int keys = monitor.ActionCount;
             Option<Point2i> moved = monitor.HasMoved;
             WindowInfo window;
-            if (myObject == null) //manual
+            if (myObject == null) //manually triggered
             {
                 window = CurrentWindow;
             }

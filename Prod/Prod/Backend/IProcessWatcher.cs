@@ -9,9 +9,21 @@ using System;
 
 namespace Prod.Backend
 {
+    /// <summary>
+    /// A generic interface for watching the foremost window and its
+    /// associated process.
+    /// </summary>
     interface IProcessWatcher
     {
+        /// <summary>
+        /// Provides information about the current window and process.
+        /// </summary>
         WindowInfo CurrentWindow { get; }
+
+        /// <summary>
+        /// Event handler that is invoked on a timer tick, or upon changing window focus
+        /// to signal that the current window should be updated.
+        /// </summary>
         void Handle(object sender, EventArgs args);
     }
 }

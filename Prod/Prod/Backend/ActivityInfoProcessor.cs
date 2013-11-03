@@ -14,10 +14,13 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace Prod.Gui
 {
-
-    class InfoProcessor
+    /// <summary>
+    /// Exposes an event of type InfoEventHandler which asyncronously 
+    /// recieves activity info and processes it in the specified way,
+    /// such as logging or graphing.
+    /// </summary>
+    class ActivityInfoProcessor
     {
-
         private IDictionary<string, double> activeTimeMap = 
             new DefaultDict<string, double>(); 
 
@@ -32,15 +35,12 @@ namespace Prod.Gui
 
         private IActivityMonitor monitor;
         private IProcessWatcher watcher;
-        //private IActiveWidget activeWidget;
 
         private ThreadQueue<Info> queue = new ThreadQueue<Info>();
         
-
         public event InfoEventHandler InfoReceived;
 
-
-        public InfoProcessor()
+        public ActivityInfoProcessor()
         {
 
             this.monitor = new WindowsActivityMonitor();
@@ -51,10 +51,7 @@ namespace Prod.Gui
 
             consumeTimer = new Timer {Interval = 100};
             consumeTimer.Tick += consume;
-            //this.activeWidget = new ActiveWidget(form.Add);
         }
-
-        
 
         public void Begin()
         {
@@ -165,18 +162,7 @@ namespace Prod.Gui
 
         private void updateActive(Info info)
         {
-            //if (activeWidget == null)
-            //{
-            //    return;
-            //}
-            //string exeText = info.ExeName;
-            //string title = info.Title;
-            //int size = Math.Min(35, title.Length);
-            //string titleText = title.Substring(0, size);
-            //string actionText = actions.ToString();
-            //string idleText = ((int)idleTime).ToString();
-            //string elapsedText = ((int)getTimeInApplication()).ToString();
-            //activeWidget.Update(exeText, titleText, actionText, idleText, elapsedText);
+            
         }
 
         /// <summary>
@@ -198,7 +184,6 @@ namespace Prod.Gui
                 InfoReceived.Invoke(this, new InfoEventArgs(info));
             }
             last = info;
-            //Console.WriteLine(ProgramInfo.FromRaw(info));
         }
 
         private void consume(object sender, EventArgs args)

@@ -1,9 +1,8 @@
 #region License
-// Copyright 2012 deweyvm, see also AUTHORS file.
-// Licenced under GPL v3
-// see COPYING file for more information or visit http://www.gnu.org/licenses/gpl-3.0.txt
-#endregion Licence
-
+// // Copyright 2012 deweyvm, see also AUTHORS file.
+// // Licenced under GPL v3
+// // see LICENCE file for more information or visit http://www.gnu.org/licenses/gpl-3.0.txt
+#endregion
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;

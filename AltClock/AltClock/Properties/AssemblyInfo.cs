@@ -1,4 +1,9 @@
-﻿using System.Reflection;
+﻿#region License
+// // Copyright 2012 deweyvm, see also AUTHORS file.
+// // Licenced under GPL v3
+// // see LICENCE file for more information or visit http://www.gnu.org/licenses/gpl-3.0.txt
+#endregion
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 

@@ -1,4 +1,9 @@
-﻿using System;
+﻿#region License
+// // Copyright 2012 deweyvm, see also AUTHORS file.
+// // Licenced under GPL v3
+// // see LICENCE file for more information or visit http://www.gnu.org/licenses/gpl-3.0.txt
+#endregion
+using System;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,19 +79,19 @@ namespace AltClock
             return chart;
         }
 
+
         public static void AddPoints(Chart chart, SeriesData data)
         {
             chart.Series.Clear();
 
             //hack adjustment to make the chartArea fill up more of the chart
-            chart.ChartAreas[0].InnerPlotPosition = new ElementPosition(-7, 0, 114, 100); 
+            chart.ChartAreas[0].InnerPlotPosition = new ElementPosition(-7, 0, 114, 100);
 
-            var order = new List<string>();
-            foreach (var name in data.AllNames)
+            var order = data.AllNames;
+            foreach (var name in order)
             {
                 Series s = initSeries(name);
                 chart.Series.Add(s);
-                order.Add(name);
             }
 
             foreach (var dict in data.Data)

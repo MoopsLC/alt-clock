@@ -12,9 +12,12 @@ using Prod.Data;
 
 namespace Prod.Logging
 {
+    /// <summary>
+    /// Allows logging of TickInfo to log productivity to disk or to stdout.
+    /// </summary>
     class Log
     {
-        private const string Dir = "C:/Users/M/Desktop/logs";
+        private const string Dir = ".";
         private string logFile;
         public Log()
         {
@@ -48,7 +51,6 @@ namespace Prod.Logging
         public void AcceptInfo(object sender, TickInfoEventArgs args)
         {
             string line = args.TickInfo.ToString();
-            //Utils.WriteLine(line);
             File.AppendAllLines(logFile, new[] { line });
         }
 

@@ -10,6 +10,10 @@ using System;
 
 namespace Prod.Data
 {
+    /// <summary>
+    /// A raw settings structure that is loaded from disk via the 
+    /// configuration file containing user preferences.
+    /// </summary>
     class SettingsInfo
     {
         public int UpdateFrequency = 5*60;

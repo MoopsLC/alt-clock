@@ -10,11 +10,16 @@ using System;
 
 namespace Prod.Data
 {
+    /// <summary>
+    /// A user specification associated with a particular program or website.
+    /// </summary>
     public struct ProgramInfo
     {
         public static readonly ProgramInfo Idle = new ProgramInfo("Idle", new List<string>(new[]{"Idle"}));
         public static readonly ProgramInfo Uncategorized = new ProgramInfo("Uncategorized Program", new List<string>(new[]{"Neutral"}));
         
+        /*NOTE these two fields are not readonly so that we can load them 
+          NOTE   from JSON automatically*/
         public string Name;
         public List<string> Categories;
 
@@ -24,7 +29,6 @@ namespace Prod.Data
             this.Categories = categories;
         }
 
-
         private static bool isUrlMatching(string domain, string rawUrl)
         {
             return rawUrl.ToLower().Contains(domain.ToLower());
@@ -32,7 +36,6 @@ namespace Prod.Data
 
         public static ProgramInfo FromRaw(TickInfo info)
         {
-
             if (info.Url.HasValue)
             {
                 foreach(var site in Settings.Options.Websites)

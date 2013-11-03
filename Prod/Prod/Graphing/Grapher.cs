@@ -12,6 +12,10 @@ using Prod.Data;
 
 namespace Prod.Graphing
 {
+    /// <summary>
+    /// Sorts TickInfo into SeriesData information that can be used
+    /// to construct a graph of program usage.
+    /// </summary>
     public class Grapher
     {
         public enum Type
@@ -21,7 +25,7 @@ namespace Prod.Graphing
         }
 
         private int categoryIndex;
-        private List<Info> infos = new List<Info>();
+        private List<TickInfo> infos = new List<TickInfo>();
         private readonly int partitions = 15;
         private readonly int updateFrequency = 60;
         public Action<SeriesData> SeriesAction;
@@ -32,9 +36,9 @@ namespace Prod.Graphing
             partitions = Settings.Options.HistoryLength;
         }
 
-        public void AcceptInfo(object sender, InfoEventArgs args)
+        public void AcceptInfo(object sender, TickInfoEventArgs args)
         {
-            Info info = args.Info;
+            TickInfo info = args.TickInfo;
             infos.Add(info);
             if (infos.Count % updateFrequency == 0)
             {
@@ -121,27 +125,6 @@ namespace Prod.Graphing
             return new SeriesData(all.Select(normalize).ToList(), allNames, timeSpan);
         }
 
-        private string makeJavascriptGraph(ICollection<string> allNames, IList<IDictionary<string, double>> all)
-        {
-            List<string> entries = new List<string>();
-
-            foreach (string name in allNames)
-            {
-                List<double> values = new List<double>();
-                foreach (var map in all)
-                {
-                    double value = map[name];
-                    values.Add(value);
-                }
-
-                SeriesEntry entry = new SeriesEntry(name, values);
-                entries.Add(entry.ToString());
-            }
-
-
-            return string.Join(",\n", entries);
-        }
-
         private static IDictionary<string, double> normalize(IDictionary<string, double> map)
         {
             var result = new DefaultDict<string, double>();
@@ -152,8 +135,5 @@ namespace Prod.Graphing
             }
             return result;
         }
-
-        
-
     }
 }

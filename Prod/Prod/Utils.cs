@@ -52,16 +52,6 @@ namespace Prod
             logger(line + "\n");
         }
 
-        public static IEnumerable<T> TakeLastN<T>(ICollection<T> list, int n)
-        {
-            int count = list.Count();
-            if (count < n)
-            {
-                return list;
-            }
-            return list.Skip(count - n);
-        }
-
         public static void WriteLine(string fmt, params object[] args)
         {
             string line;

@@ -10,6 +10,11 @@ using System.Text;
 
 namespace Prod.Data
 {
+    /// <summary>
+    /// A threadsafe queue for passing work objects around.
+    /// To prevent race conditions, ensure that only a single thread 
+    /// pushes data, and that a separate, single thread takes.
+    /// </summary>
     class ThreadQueue<T>
     {
         private object lockObject = new object();
@@ -27,6 +32,21 @@ namespace Prod.Data
             }
         }
 
+        /// <summary>
+        /// If there is data available, this will return a filled Opion 
+        /// instance. Otherwise, None is returned.
+        /// 
+        /// This function can be used in a loop such as
+        /// <code>
+        /// Option<SomeType> next = queue.TryTake();
+        /// while(next.hasValue) 
+        /// {
+        ///     //use next
+        ///     next = queue.TryTake();
+        /// }
+        /// </code>
+        /// 
+        /// </summary>
         public Option<T> TryTake()
         {
             Option<T> item = Option<T>.None;

@@ -14,6 +14,10 @@ using System.Text.RegularExpressions;
 
 namespace Prod.Data
 {
+    /// <summary>
+    /// A wrapper around the raw SettingsInfo type. 
+    /// Contains user preferences and program associations.
+    /// </summary>
     class Settings
     {
         public IDictionary<string, ProgramInfo> Programs;
@@ -34,20 +38,9 @@ namespace Prod.Data
         public readonly bool AlwaysOnTop;
         public static void Load()
         {
-            //try
-            {
-                string data = File.ReadAllText(ConfigFile);
-                SettingsInfo settings = Utils.FromInlineJson<SettingsInfo>(data);
-                options = new Settings(settings);
-
-            }
-            /*catch (Exception e)
-            {
-                Utils.WriteLine(e.Message);
-                Utils.WriteLine("Loading default configuration");
-                options = makeDefault();
-                throw e;
-            }*/
+            string data = File.ReadAllText(ConfigFile);
+            SettingsInfo settings = Utils.FromInlineJson<SettingsInfo>(data);
+            Settings.options = new Settings(settings);
         }
 
         private Settings(SettingsInfo info)
@@ -67,8 +60,6 @@ namespace Prod.Data
             {
                 Programs[program.Name] = program;
             }
-
-            
         }
 
         private static Settings makeDefault()

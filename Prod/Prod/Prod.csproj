@@ -113,7 +113,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Data\DefaultDict.cs" />
-    <Compile Include="Data\Info.cs" />
+    <Compile Include="Data\TickInfo.cs" />
     <Compile Include="Data\Option.cs" />
     <Compile Include="Data\Point2i.cs" />
     <Compile Include="Data\ProcessedInfo.cs" />

@@ -36,9 +36,9 @@ namespace Prod.Gui
         private IActivityMonitor monitor;
         private IProcessWatcher watcher;
 
-        private ThreadQueue<Info> queue = new ThreadQueue<Info>();
+        private ThreadQueue<TickInfo> queue = new ThreadQueue<TickInfo>();
         
-        public event InfoEventHandler InfoReceived;
+        public event TickInfoEventHandler InfoReceived;
 
         public ActivityInfoProcessor()
         {
@@ -64,7 +64,7 @@ namespace Prod.Gui
             //grid.Update(activeTimeMap, idleTimeMap, actionMap);
         }
 
-        private Info last;
+        private TickInfo last;
         private double lastIdleCommitted;
         private double lastFocusCommitted;
         private double lastChangedProgram;
@@ -72,7 +72,7 @@ namespace Prod.Gui
         private int actions;
         private double idleTime;
 
-        private void changeProgram(Info info)
+        private void changeProgram(TickInfo info)
         {
             lastChangedProgram = info.Time;
             actions = 0;
@@ -101,14 +101,14 @@ namespace Prod.Gui
             return string.IsNullOrEmpty(name);
         }
 
-        private void seeAction(Info info)
+        private void seeAction(TickInfo info)
         {
             lastAction = info.Time;
             actions += info.NumKeys;
             addActions(info.ExeName, info.NumKeys);
         }
 
-        private void updateText(Info info)
+        private void updateText(TickInfo info)
         {
             if (last.ProcessId != info.ProcessId)
             {
@@ -121,7 +121,7 @@ namespace Prod.Gui
             commitFocusTime(info);
         }
 
-        private void commitIdleTime(Info info)
+        private void commitIdleTime(TickInfo info)
         {
             if (info.NumKeys == 0 && !info.Mouse.HasValue)
             {
@@ -146,7 +146,7 @@ namespace Prod.Gui
             }
         }
 
-        private void commitFocusTime(Info info)
+        private void commitFocusTime(TickInfo info)
         {
             if (lastFocusCommitted != 0)
             {
@@ -160,7 +160,7 @@ namespace Prod.Gui
             }
         }
 
-        private void updateActive(Info info)
+        private void updateActive(TickInfo info)
         {
             
         }
@@ -176,22 +176,22 @@ namespace Prod.Gui
             return result;
         }
 
-        private void takeInfo(Info info)
+        private void takeInfo(TickInfo info)
         {
             updateText(info);
             if (InfoReceived != null)
             {
-                InfoReceived.Invoke(this, new InfoEventArgs(info));
+                InfoReceived.Invoke(this, new TickInfoEventArgs(info));
             }
             last = info;
         }
 
         private void consume(object sender, EventArgs args)
         {
-            Option<Info> next = queue.TryTake();
+            Option<TickInfo> next = queue.TryTake();
             while(next.HasValue)
             {
-                Info info = next.Value;
+                TickInfo info = next.Value;
                 takeInfo(info);
                 next = queue.TryTake();
             }

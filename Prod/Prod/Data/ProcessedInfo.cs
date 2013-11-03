@@ -10,6 +10,9 @@ using System;
 
 namespace Prod.Data
 {
+    /// <summary>
+    /// Stripped down TickInfo, removing low level details.
+    /// </summary>
     public struct ProcessedInfo
     {
         public readonly ProgramInfo Program;

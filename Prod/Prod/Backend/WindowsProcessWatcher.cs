@@ -16,9 +16,9 @@ namespace Prod.Backend
     class WindowsProcessWatcher : WindowsProcessWatcherBase
     {
         private IActivityMonitor monitor;
-        private ThreadQueue<Info> queue;
+        private ThreadQueue<TickInfo> queue;
         
-        public WindowsProcessWatcher(IActivityMonitor monitor, ThreadQueue<Info> queue)
+        public WindowsProcessWatcher(IActivityMonitor monitor, ThreadQueue<TickInfo> queue)
         {
             this.monitor = monitor;
             this.queue = queue;
@@ -42,7 +42,7 @@ namespace Prod.Backend
             string title = window.Title;
             double time = Utils.GetTime();
             Option<string> url = window.Url;
-            Info info = new Info(time, moved, pid, exename, title, url, keys);
+            TickInfo info = new TickInfo(time, moved, pid, exename, title, url, keys);
             queue.Add(info);
         }
     }

@@ -15,9 +15,11 @@ using Prod.Graphing;
 
 namespace Prod
 {
+    /// <summary>
+    /// A stacked area chart representing time usage in each category.
+    /// </summary>
     public class AreaChart : UserControl
     {
-
         private Chart chart;
         private const string ChartName = "Default";//attempting to change this breaks the chart
         private static readonly IDictionary<string, Color> colors =

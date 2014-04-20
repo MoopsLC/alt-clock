@@ -29,7 +29,7 @@ giving the user more fine-grained control productivity tracking.
 
 This is just a little thing I threw together so I could keep track of
 how I was spending my time without having to resort to paid solutions.
-However if decide to try it and encounter any issues, please let me know!
+However if you decide to try it and encounter any issues, please let me know!
 
 ### License
 
